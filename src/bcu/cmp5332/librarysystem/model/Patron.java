@@ -19,9 +19,29 @@ public class Patron {
     	this.phone = phone;
     }
     public void borrowBook(Book book, LocalDate dueDate) throws LibraryException {
-        // TODO: implementation here
+        // TODO: implementation here: DONE
+    	if (book.isOnLoan()) {
+    		throw new LibraryException("This book is already on loan to another patron.");
+    	}
+    	books.add(book);
+    	LocalDate currentDate = LocalDate.now();
+    	Loan loan = new Loan(this, book, currentDate, dueDate);
+    	book.setLoan(loan);
+    	
     }
-
+	public void renewBook(Book book, LocalDate dueDate) throws LibraryException {
+	        // TODO: implementation here
+		
+	}
+	
+	public void returnBook(Book book) throws LibraryException {
+	        // TODO: implementation here
+	}
+	    
+	public void addBook(Book book) {
+	        // TODO: implementation here
+	}
+	
     public int getId() {
         return id;
     }
@@ -50,17 +70,7 @@ public class Patron {
         return books;
     }
 
-    public void renewBook(Book book, LocalDate dueDate) throws LibraryException {
-        // TODO: implementation here
-    }
-
-    public void returnBook(Book book) throws LibraryException {
-        // TODO: implementation here
-    }
-    
-    public void addBook(Book book) {
-        // TODO: implementation here
-    }
+   
     
     public int getID() {
     	return id;
