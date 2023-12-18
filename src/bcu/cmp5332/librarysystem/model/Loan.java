@@ -10,7 +10,7 @@ public class Loan {
     private LocalDate dueDate;
 
     public Loan(Patron patron, Book book, LocalDate startDate, LocalDate dueDate) {
-        // TODO: implementation here
+        // TODO: implementation here : DONE
     	this.patron = patron;
     	this.book = book;
     	this.startDate = startDate;

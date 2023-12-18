@@ -34,7 +34,7 @@ public class Library {
     }
     
     public int getNextPatronId() {
-        // Find the next available patron ID
+        // Find the next available patron ID (Not part of skeleton code)
         int maxId = patrons.keySet().stream().mapToInt(Integer::intValue).max().orElse(0);
         return maxId + 1;
     }

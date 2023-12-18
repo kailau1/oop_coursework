@@ -12,7 +12,7 @@ public class Patron {
     private String phone;
     private final List<Book> books = new ArrayList<>();
     
-    // TODO: implement constructor here
+    // TODO: implement constructor here : DONE
     public Patron(int id, String name, String phone) {
     	this.id = id;
     	this.name = name;
@@ -30,16 +30,29 @@ public class Patron {
     	
     }
 	public void renewBook(Book book, LocalDate dueDate) throws LibraryException {
-	        // TODO: implementation here
+	        // TODO: implementation here : DONE
+		if (!book.isOnLoanToPatron(this)) {
+			throw new LibraryException("The book is not on loan to this patron.");
+		} else {
+			book.setDueDate(dueDate);
+		}
 		
 	}
 	
 	public void returnBook(Book book) throws LibraryException {
-	        // TODO: implementation here
+	        // TODO: implementation here : DONE
+		if (!book.isOnLoanToPatron(this)) {
+			throw new LibraryException("The book is not on loan to this patron.");
+		} else {
+			books.remove(book);
+			book.setLoan(null);
+		}
 	}
 	    
 	public void addBook(Book book) {
-	        // TODO: implementation here
+	        // TODO: implementation here : DONE 
+		books.add(book);
+		
 	}
 	
     public int getId() {
