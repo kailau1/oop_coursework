@@ -1,2 +1,2 @@
-1::Abdel-Rahman Tawil::07555555555::
-2::Kostas Vlachos::07596454545::
+1::Abdel-Rahman Tawil::07555555555::abdel-rahman-tawil@mail.bcu.ac.uk
+2::Kostas Vlachos::07596454545::kostas-vlachos@gmail.com

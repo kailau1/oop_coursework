@@ -10,13 +10,15 @@ public class Patron {
     private int id;
     private String name;
     private String phone;
+    private String email;
     private final List<Book> books = new ArrayList<>();
     
     // TODO: implement constructor here : DONE
-    public Patron(int id, String name, String phone) {
+    public Patron(int id, String name, String phone, String email) {
     	this.id = id;
     	this.name = name;
     	this.phone = phone;
+    	this.email = email;
     }
     public void borrowBook(Book book, LocalDate dueDate) throws LibraryException {
         // TODO: implementation here: DONE
@@ -55,6 +57,14 @@ public class Patron {
 		
 	}
 	
+	public String getDetails() {
+		return  "Patron #" + id + "- Name: " + name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
     public int getId() {
         return id;
     }
@@ -74,6 +84,10 @@ public class Patron {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+    public void setEmail(String email) {
+    	this.email = email;
+    }
 
     public String getPhone() {
         return phone;
@@ -83,12 +97,6 @@ public class Patron {
         return books;
     }
 
-   
-    
-    public int getID() {
-    	return id;
-    }
-    
     
 }
  

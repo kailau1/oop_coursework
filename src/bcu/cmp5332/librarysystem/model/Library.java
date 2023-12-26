@@ -17,6 +17,11 @@ public class Library {
         List<Book> out = new ArrayList<>(books.values());
         return Collections.unmodifiableList(out);
     }
+    
+    public List<Patron> getPatrons() {
+    	List<Patron> out = new ArrayList<>(patrons.values());
+    	return Collections.unmodifiableList(out);
+    }
 
     public Book getBookByID(int id) throws LibraryException {
         if (!books.containsKey(id)) {
@@ -48,10 +53,10 @@ public class Library {
 
     public void addPatron(Patron patron) {
         // TODO: implementation here: DONE
-    	if (patrons.containsKey(patron.getID())) {
+    	if (patrons.containsKey(patron.getId())) {
     		throw new IllegalArgumentException("This patron already exists.");
     	}
-    	patrons.put(patron.getID(), patron);
+    	patrons.put(patron.getId(), patron);
     }
 }
  
