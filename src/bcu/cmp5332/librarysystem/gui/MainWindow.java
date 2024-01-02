@@ -1,9 +1,14 @@
 package bcu.cmp5332.librarysystem.gui;
 
+import bcu.cmp5332.librarysystem.data.LibraryData;
+import bcu.cmp5332.librarysystem.main.LibraryException;
 import bcu.cmp5332.librarysystem.model.Book;
 import bcu.cmp5332.librarysystem.model.Library;
+import bcu.cmp5332.librarysystem.model.Patron;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -114,10 +119,10 @@ public class MainWindow extends JFrame implements ActionListener {
     }	
 
 /* Uncomment the following code to run the GUI version directly from the IDE */
-//    public static void main(String[] args) throws IOException, LibraryException {
-//        Library library = LibraryData.load();
-//        new MainWindow(library);			
-//    }
+    public static void main(String[] args) throws IOException, LibraryException {
+        Library library = LibraryData.load();
+        new MainWindow(library);			
+    }
 
 
 
@@ -142,7 +147,7 @@ public class MainWindow extends JFrame implements ActionListener {
             
             
         } else if (ae.getSource() == memView) {
-            
+            displayPatrons();
             
         } else if (ae.getSource() == memAdd) {
             
@@ -172,4 +177,23 @@ public class MainWindow extends JFrame implements ActionListener {
         this.getContentPane().add(new JScrollPane(table));
         this.revalidate();
     }	
+    
+    public void displayPatrons() {
+        List<Patron> patronsList = library.getPatrons();
+        String[] columns = new String[]{"Name", "Phone", "Email", "# Of books on loan"};
+
+        Object[][] data = new Object[patronsList.size()][6];
+        for (int i = 0; i < patronsList.size(); i++) {
+            Patron patron = patronsList.get(i);
+            data[i][0] = patron.getName();
+            data[i][1] = patron.getPhone();
+            data[i][2] = patron.getEmail();
+            data[i][3] = patron.getBooks().size();
+        }
+
+        JTable table = new JTable(data, columns);
+        this.getContentPane().removeAll();
+        this.getContentPane().add(new JScrollPane(table));
+        this.revalidate();
+    }
 }
