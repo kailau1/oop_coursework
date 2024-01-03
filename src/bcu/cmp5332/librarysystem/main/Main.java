@@ -3,7 +3,6 @@ package bcu.cmp5332.librarysystem.main;
 import bcu.cmp5332.librarysystem.data.LibraryData;
 import bcu.cmp5332.librarysystem.commands.Command;
 import bcu.cmp5332.librarysystem.model.Library;
-import bcu.cmp5332.librarysystem.gui.*;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -32,9 +31,6 @@ public class Main {
                 System.out.println(ex.getMessage());
             }
         }
-
-        // Load GUI after command execution loop
-        new MainWindow(library);
 
         // Store library data and exit
         LibraryData.store(library);
