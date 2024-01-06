@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import bcu.cmp5332.librarysystem.commands.*;
 import bcu.cmp5332.librarysystem.data.*;
 import bcu.cmp5332.librarysystem.main.LibraryException;
 import bcu.cmp5332.librarysystem.model.*;
@@ -38,9 +37,7 @@ class DataManagerTest {
         File booksFile = new File(booksFilePath);
         assertTrue(booksFile.exists());
 
-        // Read the content of the books file and verify its content
-        // Assert the content of the file matches the expected data
-        // You can use assertions to verify the content of the file
+
     }
 
 }
