@@ -27,6 +27,14 @@ public class CommandParser {
 
 				return new AddBook(title, author, publicationYear, publisher);
 			} else if (cmd.equals("addpatron")) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				System.out.print("Name: ");
+				String name = br.readLine();
+				System.out.print("Phone: ");
+				String phone = br.readLine();
+				System.out.print("Email: ");
+				String email = br.readLine();
+				return new AddPatron(name, phone, email);
 
 			} else if (cmd.equals("loadgui")) {
 				return new LoadGUI();
@@ -46,6 +54,7 @@ public class CommandParser {
 					return new ShowBook(id);
 
 				} else if (cmd.equals("showpatron")) {
+					
 
 				}
 			} else if (parts.length == 3) {
