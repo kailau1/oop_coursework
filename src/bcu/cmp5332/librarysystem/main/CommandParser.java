@@ -54,7 +54,7 @@ public class CommandParser {
 					return new ShowBook(id);
 
 				} else if (cmd.equals("showpatron")) {
-					
+					return new ShowPatron(id);
 
 				}
 			} else if (parts.length == 3) {

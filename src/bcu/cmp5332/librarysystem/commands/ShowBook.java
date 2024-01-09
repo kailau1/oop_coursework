@@ -16,21 +16,20 @@ public class ShowBook implements Command{
 	}
 	
 	@Override
-    public void execute(Library library, LocalDate currentDate) throws LibraryException {
-        Book book = library.getBookByID(bookId);
-        if (book == null) {
-            throw new LibraryException("Book with ID " + bookId + " not found.");
-        }
-        
-        System.out.println(book.getDetailsLong());
-        if (book.isOnLoan()) {
-            Patron patron = book.getLoan().getPatron();
-            LocalDate dueDate = book.getLoan().getDueDate();
-            System.out.println(book.getDetailsShort() + " is borrowed by Patron: " + patron.getDetails());
-            System.out.println("Due Date: " + dueDate);
-        } else {
-            System.out.println(book.getDetailsLong());
-        }
-    }
-
+	public void execute(Library library, LocalDate currentDate) throws LibraryException {
+	    Book book = library.getBookByID(bookId);
+	    if (book == null) {
+	        throw new LibraryException("Book with ID " + bookId + " not found.");
+	    }
+	    
+	    if (book.isOnLoan()) {
+	        Patron patron = book.getLoan().getPatron();
+	        LocalDate dueDate = book.getLoan().getDueDate();
+	        System.out.println(book.getDetailsShort() + " is borrowed by Patron: " + patron.getDetails());
+	        System.out.println("Due Date: " + dueDate);
+	    } else {
+	        System.out.println(book.getDetailsLong());
+	    }
+	}
 }
+

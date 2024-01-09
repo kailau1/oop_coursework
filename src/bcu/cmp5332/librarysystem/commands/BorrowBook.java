@@ -1,8 +1,10 @@
 package bcu.cmp5332.librarysystem.commands;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import bcu.cmp5332.librarysystem.main.LibraryException;
 import bcu.cmp5332.librarysystem.model.*;
+import bcu.cmp5332.librarysystem.data.LibraryData; 
 
 public class BorrowBook implements Command {
 	
@@ -33,12 +35,21 @@ public class BorrowBook implements Command {
 	    LocalDate dueDate = currentDate.plusDays(library.getLoanPeriod());
 	    Loan loan = new Loan(patron, book, currentDate, dueDate);
 
-	    patron.borrowBook(book, dueDate);
-	    book.setLoan(loan);
+	    try {
+	        patron.borrowBook(book, dueDate);
+	        book.setLoan(loan);
 
-	    System.out.println("Book #" + bookId + " has been successfully lent to Patron #" + patronId);
-	    System.out.println("Due Date: " + dueDate);
+	        System.out.println("Book #" + bookId + " has been successfully lent to Patron #" + patronId);
+	        System.out.println("Due Date: " + dueDate);
+
+	        LibraryData.store(library); 
+	    } catch (IOException e) {
+	        book.setLoan(null); 
+	        patron.removeBook(book); 
+	        throw new LibraryException("Failed to save changes: " + e.getMessage());
+	    }
 	}
+
 	
 
 }

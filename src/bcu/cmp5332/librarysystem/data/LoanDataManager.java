@@ -16,9 +16,8 @@ public class LoanDataManager implements DataManager {
 
     @Override
     public void loadData(Library library) throws IOException, LibraryException {
-        // TODO: implementation here : DONE
-    	try (Scanner sc = new Scanner(new File(RESOURCE))) {
-    		int line_idx = 1;
+        try (Scanner sc = new Scanner(new File(RESOURCE))) {
+            int line_idx = 1;
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] properties = line.split(SEPARATOR, -1);
@@ -33,8 +32,10 @@ public class LoanDataManager implements DataManager {
 
                     if (patron != null && book != null) {
                         Loan loan = new Loan(patron, book, startDate, dueDate);
-                        book.setLoan(loan); 
+                        
                         patron.borrowBook(book, dueDate);
+                        
+                        book.setLoan(loan);
                     }
                 } catch (NumberFormatException ex) {
                     throw new LibraryException("Error parsing loan data on line: " + line_idx + "\nError" + ex);
@@ -42,6 +43,7 @@ public class LoanDataManager implements DataManager {
             }
         }
     }
+
 
 
     @Override

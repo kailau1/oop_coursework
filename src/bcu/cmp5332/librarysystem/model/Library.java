@@ -58,5 +58,16 @@ public class Library {
     	}
     	patrons.put(patron.getId(), patron);
     }
+    
+    public void removePatron(int patronId) {
+    	// For rollback purposes only        
+    	patrons.remove(patronId);
+    }
+
+    public void removeBook(int bookId) {
+        // For rollback purposes only
+        books.remove(bookId);
+    }
+
 }
  

@@ -31,15 +31,14 @@ public class Patron {
     	book.setLoan(loan);
     	
     }
-	public void renewBook(Book book, LocalDate dueDate) throws LibraryException {
-	        // TODO: implementation here : DONE
-		if (!book.isOnLoanToPatron(this)) {
-			throw new LibraryException("The book is not on loan to this patron.");
-		} else {
-			book.setDueDate(dueDate);
-		}
-		
-	}
+    public void renewBook(Book book, LocalDate newDueDate) throws LibraryException {
+        if (!book.isOnLoanToPatron(this)) {
+            throw new LibraryException("The book is not on loan to this patron.");
+        } else {
+            book.getLoan().setDueDate(newDueDate);
+        }
+    }
+
 	
 	public void returnBook(Book book) throws LibraryException {
 	        // TODO: implementation here : DONE
@@ -55,6 +54,11 @@ public class Patron {
 	        // TODO: implementation here : DONE 
 		books.add(book);
 		
+	}
+	
+	public void removeBook(Book book) {
+			// For rollback purposes only
+		books.remove(book);
 	}
 	
 	public String getDetails() {
