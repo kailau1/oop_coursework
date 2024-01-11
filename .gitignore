@@ -1,1 +1,10 @@
 /target/
+o.DS_Store
+.classpath
+.git
+.gitignore
+.project
+.settings
+bin
+doc
+pom.xml

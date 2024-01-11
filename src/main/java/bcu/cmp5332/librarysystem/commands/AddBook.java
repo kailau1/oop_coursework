@@ -8,6 +8,12 @@ import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Add a book class
+ * 
+ * @author kailau
+ * 
+ */
 public class AddBook implements  Command {
 
     private final String title;
@@ -15,6 +21,7 @@ public class AddBook implements  Command {
     private final String publicationYear;
     private final String publisher;
 
+    
     public AddBook(String title, String author, String publicationYear, String publisher) {
         this.title = title;
         this.author = author;
@@ -22,8 +29,17 @@ public class AddBook implements  Command {
         this.publisher = publisher;
     }
     
+    
+
+    /**
+     * Execute the Command to add a book to the library
+     * 
+     * @param library Library object
+     * @param currentDate Current date of loan
+     */
     @Override
     public void execute(Library library, LocalDate currentDate) throws LibraryException {
+    	
         int maxId = 0;
         if (library.getBooks().size() > 0) {
             maxId = library.getBooks().stream().mapToInt(Book::getId).max().orElse(0);

@@ -39,6 +39,10 @@ public class MainWindow extends JFrame implements ActionListener {
     private JMenuItem memAdd;
     private JMenuItem memDel;
     private JMenuItem memShowPatron;
+    private JMenuItem memBorrowBook;
+    private JMenuItem memReturnBook;
+    private JMenuItem memRenewBook;
+
 
     private Library library;
 
@@ -104,16 +108,24 @@ public class MainWindow extends JFrame implements ActionListener {
         memAdd = new JMenuItem("Add");
         memDel = new JMenuItem("Delete");
         memShowPatron = new JMenuItem("View Patron");
+        memBorrowBook = new JMenuItem("Borrow Book");
+        memReturnBook = new JMenuItem("Return Book");
+        memRenewBook = new JMenuItem("Renew Book");
+        
 
         membersMenu.add(memView);
         membersMenu.add(memAdd);
         membersMenu.add(memDel);
         membersMenu.add(memShowPatron);
+        membersMenu.add(memBorrowBook);
+        membersMenu.add(memReturnBook);
+        membersMenu.add(memRenewBook);
 
-        memView.addActionListener(this);
-        memAdd.addActionListener(this);
-        memDel.addActionListener(this);
-        memShowPatron.addActionListener(this);
+   
+
+        for (int i = 0; i < membersMenu.getItemCount(); i++) {
+            membersMenu.getItem(i).addActionListener(this);
+        }
 
         setSize(800, 500);
 
@@ -184,8 +196,14 @@ public class MainWindow extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Invalid Patron ID.");
                 }
             }
-        }
+        } else if (ae.getSource() == memBorrowBook) {
         	
+        } else if (ae.getSource() == memReturnBook) {
+        	
+        } else if (ae.getSource() == memRenewBook) {
+        	
+        }
+        
         }
     
 
@@ -283,12 +301,14 @@ public class MainWindow extends JFrame implements ActionListener {
 
                 if (book.isOnLoan()) {
                     Patron patron = book.getLoan().getPatron();
+                    
                     String patronDetails = "Patron Details:\n" +
                         "ID: " + patron.getId() + "\n" +
                         "Name: " + patron.getName() + "\n" +
                         "Phone: " + patron.getPhone() + "\n" +
                         "Email: " + patron.getEmail() + "\n" +
                         "Due Date: " + book.getDueDate();
+                    	
                     
                     JOptionPane.showMessageDialog(this, patronDetails, "Patron Details", JOptionPane.INFORMATION_MESSAGE);
                 }
