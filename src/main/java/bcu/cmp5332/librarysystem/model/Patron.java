@@ -6,44 +6,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Patron {
-    
-    private int id;
-    private String name;
-    private String phone;
-    private String email;
-    private final List<Book> books = new ArrayList<>();
-    private Boolean state;
-    
-    // TODO: implement constructor here : DONE
-    public Patron(int id, String name, String phone, String email, Boolean state) {
-    	this.id = id;
-    	this.name = name;
-    	this.phone = phone;
-    	this.email = email;
-    	this.state = state;
-    }
-    public void borrowBook(Book book, LocalDate dueDate) throws LibraryException {
-        // TODO: implementation here: DONE
-    	if (book.isOnLoan()) {
-    		throw new LibraryException("This book is already on loan to another patron.");
-    	}
-    	books.add(book);
-    	LocalDate currentDate = LocalDate.now();
-    	Loan loan = new Loan(this, book, currentDate, dueDate);
-    	book.setLoan(loan);
-    	
-    }
-    public void renewBook(Book book, LocalDate newDueDate) throws LibraryException {
-        if (!book.isOnLoanToPatron(this)) {
-            throw new LibraryException("The book is not on loan to this patron.");
-        } else {
-            book.getLoan().setDueDate(newDueDate);
-        }
-    }
 
-	
+	private int id;
+	private String name;
+	private String phone;
+	private String email;
+	private final List<Book> books = new ArrayList<>();
+	private Boolean state;
+	private static final int maxBooks = 5;
+
+	// TODO: implement constructor here : DONE
+	public Patron(int id, String name, String phone, String email, Boolean state) {
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.state = state;
+	}
+
+	public void borrowBook(Book book, LocalDate dueDate) throws LibraryException {
+		if (books.size() >= maxBooks) {
+			throw new LibraryException("Maximum number of borrowed books reached.");
+		}
+		if (book.isOnLoan()) {
+			throw new LibraryException("This book is already on loan to another patron.");
+		}
+		books.add(book);
+		LocalDate currentDate = LocalDate.now();
+		Loan loan = new Loan(this, book, currentDate, dueDate);
+		book.setLoan(loan);
+	}
+
+	public void renewBook(Book book, LocalDate newDueDate) throws LibraryException {
+		if (!book.isOnLoanToPatron(this)) {
+			throw new LibraryException("The book is not on loan to this patron.");
+		} else {
+			book.getLoan().setDueDate(newDueDate);
+		}
+	}
+
 	public void returnBook(Book book) throws LibraryException {
-	        // TODO: implementation here : DONE
+		// TODO: implementation here : DONE
 		if (!book.isOnLoanToPatron(this)) {
 			throw new LibraryException("The book is not on loan to this patron.");
 		} else {
@@ -51,69 +54,68 @@ public class Patron {
 			book.setLoan(null);
 		}
 	}
-	    
+
 	public void addBook(Book book) {
-	        // TODO: implementation here : DONE 
+		// TODO: implementation here : DONE
 		books.add(book);
-		
+
 	}
-	
+
 	public void removeBook(Book book) {
-			// For rollback purposes only
+		// For rollback purposes only
 		books.remove(book);
 	}
-	
+
 	public String getDetails() {
-		return  "Patron #" + id + "- Name: " + name;
+		return "Patron #" + id + "- Name: " + name;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
-    public int getId() {
-        return id;
-    }
 
-    public String getName() {
-        return name;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    
-    public void setEmail(String email) {
-    	this.email = email;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public List<Book> getBooks() {
-        return books;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setActive() {
-    	this.state = true; 
-    }
-    
-    public void setInactive() {
-    	this.state = false;
-    }
-    
-    public Boolean getState() {
-    	return state; 
-    }
-    
+	public String getPhone() {
+		return phone;
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setActive() {
+		this.state = true;
+	}
+
+	public void setInactive() {
+		this.state = false;
+	}
+
+	public Boolean getState() {
+		return state;
+	}
+
 }
- 

@@ -20,7 +20,7 @@ public class BorrowBook implements Command {
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {
 	    Patron patron = library.getPatronByID(patronId);
 	    if (patron == null || !patron.getState()) {
-	        throw new LibraryException("Patron with ID " + patronId + " is not active or does not exist.");
+	        throw new LibraryException("Patron with ID " + patronId + " is ndoes not exist.");
 	    }
 
 	    Book book = library.getBookByID(bookId);
@@ -36,18 +36,20 @@ public class BorrowBook implements Command {
 	    Loan loan = new Loan(patron, book, currentDate, dueDate);
 
 	    try {
-	        patron.borrowBook(book, dueDate);
-	        book.setLoan(loan);
+            patron.borrowBook(book, dueDate);
+            book.setLoan(loan);
 
-	        System.out.println("Book #" + bookId + " has been successfully lent to Patron #" + patronId);
-	        System.out.println("Due Date: " + dueDate);
+            System.out.println("Book #" + bookId + " has been successfully lent to Patron #" + patronId);
+            System.out.println("Due Date: " + dueDate);
 
-	        LibraryData.store(library); 
-	    } catch (IOException e) {
-	        book.setLoan(null); 
-	        patron.removeBook(book); 
-	        throw new LibraryException("Failed to save changes: " + e.getMessage());
-	    }
+            LibraryData.store(library); 
+        } catch (IOException e) {
+            book.setLoan(null);
+            patron.removeBook(book);
+            throw new LibraryException("Failed to save changes: " + e.getMessage());
+        } catch (LibraryException e) {
+            throw new LibraryException(e.getMessage()); //Handling exception if patron has reached its limit of books
+        }
 	}
 
 	
