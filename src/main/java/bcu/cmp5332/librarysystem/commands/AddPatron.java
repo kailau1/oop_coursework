@@ -25,7 +25,7 @@ public class AddPatron implements Command {
     @Override
     public void execute(Library library, LocalDate currentDate) throws LibraryException {
         int nextPatronID = library.getNextPatronId();
-        Patron newPatron = new Patron(nextPatronID, name, phone, email);
+        Patron newPatron = new Patron(nextPatronID, name, phone, email, true);
         library.addPatron(newPatron);
 
         try {

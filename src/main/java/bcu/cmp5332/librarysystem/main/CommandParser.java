@@ -5,7 +5,6 @@ import bcu.cmp5332.librarysystem.commands.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
 public class CommandParser {
 
@@ -56,6 +55,14 @@ public class CommandParser {
 				} else if (cmd.equals("showpatron")) {
 					return new ShowPatron(id);
 
+				} else if (cmd.equals("removepatron")) {
+					return new RemovePatron(id);
+				} else if (cmd.equals("removebook")) {
+					return new RemoveBook(id);
+				} else if (cmd.equals("activatepatron")) {
+					return new ActivatePatron(id);
+				} else if (cmd.equals("activatebook")) {
+					return new ActivateBook(id);
 				}
 			} else if (parts.length == 3) {
 				int patronId = Integer.parseInt(parts[1]);

@@ -12,13 +12,15 @@ public class Patron {
     private String phone;
     private String email;
     private final List<Book> books = new ArrayList<>();
+    private Boolean state;
     
     // TODO: implement constructor here : DONE
-    public Patron(int id, String name, String phone, String email) {
+    public Patron(int id, String name, String phone, String email, Boolean state) {
     	this.id = id;
     	this.name = name;
     	this.phone = phone;
     	this.email = email;
+    	this.state = state;
     }
     public void borrowBook(Book book, LocalDate dueDate) throws LibraryException {
         // TODO: implementation here: DONE
@@ -101,6 +103,17 @@ public class Patron {
         return books;
     }
 
+    public void setActive() {
+    	this.state = true; 
+    }
+    
+    public void setInactive() {
+    	this.state = false;
+    }
+    
+    public Boolean getState() {
+    	return state; 
+    }
     
 }
  

@@ -1,5 +1,3 @@
-package test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import bcu.cmp5332.librarysystem.data.*;
@@ -39,5 +37,18 @@ class DataManagerTest {
 
 
     }
+	
+	@Test 
+	void testStoreBookData_throwException() {
+		
+	}
 
+	@Test
+	void testStoreBookData_nullLibrary() throws IOException {
+		
+        BookDataManager bookDataManager = new BookDataManager();
+        bookDataManager.storeData(null);
+
+	}
+	
 }

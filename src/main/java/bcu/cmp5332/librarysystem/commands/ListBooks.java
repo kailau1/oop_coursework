@@ -4,19 +4,25 @@ import bcu.cmp5332.librarysystem.model.Book;
 import bcu.cmp5332.librarysystem.model.Library;
 import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+
 
 public class ListBooks implements Command {
 
     @Override
     public void execute(Library library, LocalDate currentDate) throws LibraryException {
-        List<Book> books = library.getBooks();
-        String output = generateBooksList(books);
-        System.out.println(output);
+    	List<Book> activeBooks = new ArrayList<>();
+        for (Book book : library.getBooks()) {
+            if (book.getState()) {
+                activeBooks.add(book);
+            }
+        }
+        System.out.println(generateBooksList(activeBooks));
+
     }
 
-    //Added functions for testing
     public String generateBooksList(List<Book> books) {
         StringJoiner joiner = new StringJoiner("\n");
         for (Book book : books) {

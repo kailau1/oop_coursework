@@ -44,7 +44,7 @@ public class AddBook implements  Command {
         if (library.getBooks().size() > 0) {
             maxId = library.getBooks().stream().mapToInt(Book::getId).max().orElse(0);
         }
-        Book newBook = new Book(++maxId, title, author, publicationYear, publisher);
+        Book newBook = new Book(++maxId, title, author, publicationYear, publisher, true);
         library.addBook(newBook);
 
         try {

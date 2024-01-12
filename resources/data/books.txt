@@ -1,2 +1,4 @@
-1::Book 1::Author 1::2023::Publisher 1::
-2::Book 2::Author 2::2024::Publisher 2::
+1::Nineteen Eighty-Four::George Orwell::1949::Secker & Warburg::true::
+2::The Hitchhiker's Guide to the Galaxy::Douglas Adams::1979::Pan Books::true::
+3::The War of The Worlds::H.G. Wells::1898::William Heinemann::true::
+4::The Perks of Being a Wallflower::Stephen Chbosky::1999::Pocket Books::true::

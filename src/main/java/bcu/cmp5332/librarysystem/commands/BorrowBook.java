@@ -19,13 +19,13 @@ public class BorrowBook implements Command {
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {
 	    Patron patron = library.getPatronByID(patronId);
-	    if (patron == null) {
-	        throw new LibraryException("Patron with ID " + patronId + " does not exist.");
+	    if (patron == null || !patron.getState()) {
+	        throw new LibraryException("Patron with ID " + patronId + " is not active or does not exist.");
 	    }
 
 	    Book book = library.getBookByID(bookId);
-	    if (book == null) {
-	        throw new LibraryException("Book with ID " + bookId + " does not exist.");
+	    if (book == null || !book.getState()) {
+	        throw new LibraryException("Book with ID " + bookId + " is not active or does not exist.");
 	    }
 
 	    if (book.isOnLoan()) {

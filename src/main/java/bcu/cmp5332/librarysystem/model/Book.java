@@ -10,15 +10,17 @@ public class Book {
     private String author;
     private String publicationYear;
     private String publisher;
+    private Boolean state;
 
     private Loan loan;
 
-    public Book(int id, String title, String author, String publicationYear, String publisher) {
+    public Book(int id, String title, String author, String publicationYear, String publisher, Boolean state) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.publisher = publisher;
+        this.state = state;
     }
 
     public int getId() {
@@ -116,5 +118,16 @@ public class Book {
     public boolean isOnLoanToPatron(Patron patron) {
         return (loan != null && loan.getPatron().equals(patron));
     }
-
+    
+    public void setActive() {
+    	this.state = true; 
+    }
+    
+    public void setInactive() {
+    	this.state = false;
+    }
+    
+    public Boolean getState() {
+    	return state; 
+    }
 }

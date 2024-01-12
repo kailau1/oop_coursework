@@ -19,7 +19,7 @@ public class ShowPatron implements Command{
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {
         Patron patron = library.getPatronByID(patronId);
-        if (patron == null) {
+        if (patron == null || !patron.getState()) {
             throw new LibraryException("Patron with ID " + patronId + " not found.");
         }
 

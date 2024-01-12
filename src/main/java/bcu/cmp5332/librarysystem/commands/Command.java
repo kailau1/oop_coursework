@@ -17,6 +17,10 @@ public interface Command {
             + "\tborrow [patron id] [book id]    borrow a book\n"
             + "\trenew [patron id] [book id]     renew a book\n"
             + "\treturn [patron id] [book id]    return a book\n"
+            + "\tremovepatron [patron id]        remove a patron\n"
+            + "\tremovebook [book id]            remove a book\n"
+            + "\tactivatrpatron [patron id]      activate a patron\n"
+            + "\tactivatebook [book id]          activate a book\n"
             + "\tloadgui                         loads the GUI version of the app\n"
             + "\thelp                            prints this help message\n"
             + "\texit                            exits the program";
