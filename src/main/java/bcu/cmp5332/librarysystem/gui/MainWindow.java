@@ -9,6 +9,7 @@ import bcu.cmp5332.librarysystem.model.Patron;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -158,6 +159,7 @@ public class MainWindow extends JFrame implements ActionListener {
             new AddBookWindow(this);
             
         } else if (ae.getSource() == booksDel) {
+        	new RemoveBookWindow(this);
             
             
         } else if (ae.getSource() == booksIssue) {
@@ -184,7 +186,7 @@ public class MainWindow extends JFrame implements ActionListener {
             new AddPatronWindow(this);
             
         } else if (ae.getSource() == memDel) {
-            
+            new RemovePatronWindow(this);
             
         } else if (ae.getSource() == memShowPatron) {
         	String patronIdStr = JOptionPane.showInputDialog(this, "Enter Patron ID:");
@@ -208,7 +210,12 @@ public class MainWindow extends JFrame implements ActionListener {
     
 
     public void displayBooks() {
-        List<Book> booksList = library.getBooks();
+    	List<Book> booksList = new ArrayList<>();
+        for (Book book : library.getBooks()) {
+            if (book.getState()) {
+                booksList.add(book);
+            }
+        }
         String[] columns = new String[]{"ID", "Title", "Author", "Pub Date", "Status"};
 
         Object[][] data = new Object[booksList.size()][6];
@@ -227,8 +234,17 @@ public class MainWindow extends JFrame implements ActionListener {
         this.revalidate();
     }	
     
+    /**
+     * Function to display all patron details within the GUI
+     */
+    
     public void displayPatrons() {
-        List<Patron> patronsList = library.getPatrons();
+    	List<Patron> patronsList = new ArrayList<>();
+        for(Patron patron : library.getPatrons()) {
+        	if (patron.getState()) {
+        		patronsList.add(patron);
+        	}
+        }
         String[] columns = new String[]{"ID", "Name", "Phone", "Email", "# Of books on loan"};
 
         Object[][] data = new Object[patronsList.size()][6];
@@ -246,6 +262,10 @@ public class MainWindow extends JFrame implements ActionListener {
         this.getContentPane().add(new JScrollPane(table));
         this.revalidate();
     }
+    
+    /**
+     * Function to display a single patron's details within the GUI
+     */
     
     private void displayPatronDetails(int patronId) {
         try {
@@ -281,6 +301,10 @@ public class MainWindow extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Error retrieving patron details: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    /**
+     * Function to display a single book's details within the GUI
+     */
     
     private void displayBookDetails(int bookId) {
         try {

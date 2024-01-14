@@ -24,17 +24,21 @@ public class RemovePatron implements Command {
         }
 
         boolean originalState = patron.getState();
-
-        patron.setInactive();
+        
+        
 
         try {
+        	if (patron.getBooks().size() != 0) {
+        		System.out.println("Unable to remove this patron as they have books on loan.");
+        	} else {
+        		patron.setInactive();
+                System.out.println("Patron #" + patronId + " has been set to inactive.");
+
+        	}
             LibraryData.store(library);
-            System.out.println("Patron #" + patronId + " has been set to inactive.");
         } catch (IOException e) {
             if (originalState) {
                 patron.setActive();
-            } else {
-                patron.setInactive();
             }
             throw new LibraryException("Failed to save changes: " + e.getMessage());
         }

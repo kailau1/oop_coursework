@@ -1,6 +1,6 @@
 package bcu.cmp5332.librarysystem.gui;
 
-import bcu.cmp5332.librarysystem.commands.AddPatron;
+import bcu.cmp5332.librarysystem.commands.RemoveBook;
 import bcu.cmp5332.librarysystem.commands.Command;
 import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.awt.BorderLayout;
@@ -17,17 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-public class AddPatronWindow extends JFrame implements ActionListener {
+public class RemoveBookWindow extends JFrame implements ActionListener {
 
     private MainWindow mw;
-    private JTextField nameText = new JTextField();
-    private JTextField phoneText = new JTextField();
-    private JTextField emailText = new JTextField();
+    private JTextField ID = new JTextField();
 
-    private JButton addBtn = new JButton("Add");
+    private JButton removeBtn = new JButton("Remove");
     private JButton cancelBtn = new JButton("Cancel");
 
-    public AddPatronWindow(MainWindow mw) {
+    public RemoveBookWindow(MainWindow mw) {
         this.mw = mw;
         initialize();
     }
@@ -43,25 +41,21 @@ public class AddPatronWindow extends JFrame implements ActionListener {
 
         } 
 
-        setTitle("Add a New Book");
+        setTitle("Remove a Book");
 
         setSize(300, 200);
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(5, 2));
-        topPanel.add(new JLabel("Name : "));
-        topPanel.add(nameText);
-        topPanel.add(new JLabel("Phone Number : "));
-        topPanel.add(phoneText);
-        topPanel.add(new JLabel("Email : "));
-        topPanel.add(emailText);
+        topPanel.add(new JLabel("Book ID : "));
+        topPanel.add(ID);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
         bottomPanel.add(new JLabel("     "));
-        bottomPanel.add(addBtn);
+        bottomPanel.add(removeBtn);
         bottomPanel.add(cancelBtn);
 
-        addBtn.addActionListener(this);
+        removeBtn.addActionListener(this);
         cancelBtn.addActionListener(this);
 
         this.getContentPane().add(topPanel, BorderLayout.CENTER);
@@ -74,25 +68,20 @@ public class AddPatronWindow extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == addBtn) {
-            addBook();
+        if (ae.getSource() == removeBtn) {
+            removeBook();
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
         }
 
     }
 
-    private void addBook() {
+    private void removeBook() {
         try {
-            String name = nameText.getText();
-            String phone = phoneText.getText();
-            String email = emailText.getText();
-            // create and execute the AddBook Command
-            Command addPatron = new AddPatron(name, phone, email);
-            addPatron.execute(mw.getLibrary(), LocalDate.now());
-            // refresh the view with the list of books
-            mw.displayPatrons();
-            // hide (close) the AddBookWindow
+            Integer id = Integer.parseInt(ID.getText());
+            Command removeBook = new RemoveBook(id);
+            removeBook.execute(mw.getLibrary(), LocalDate.now());
+            mw.displayBooks();
             this.setVisible(false);
         } catch (LibraryException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);

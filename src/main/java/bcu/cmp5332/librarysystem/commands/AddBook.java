@@ -8,12 +8,7 @@ import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.io.IOException;
 import java.time.LocalDate;
 
-/**
- * Add a book class
- * 
- * @author kailau
- * 
- */
+
 public class AddBook implements  Command {
 
     private final String title;

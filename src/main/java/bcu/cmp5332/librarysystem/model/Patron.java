@@ -13,7 +13,7 @@ public class Patron {
 	private String email;
 	private final List<Book> books = new ArrayList<>();
 	private Boolean state;
-	private static final int maxBooks = 5;
+	private final int maxBooks = 5;
 
 	// TODO: implement constructor here : DONE
 	public Patron(int id, String name, String phone, String email, Boolean state) {
@@ -106,13 +106,25 @@ public class Patron {
 		return books;
 	}
 
+	/**
+     * Function to set a patron as active
+     */
+	
 	public void setActive() {
 		this.state = true;
 	}
 
+	/**
+     * Function to set a patron as inactive
+     */
+	
 	public void setInactive() {
 		this.state = false;
 	}
+	
+	/**
+     * Function to return the patron's state (active or inactive)
+     */
 
 	public Boolean getState() {
 		return state;

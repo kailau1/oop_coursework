@@ -32,7 +32,6 @@ public class Main {
             }
         }
 
-        // Store library data and exit
         LibraryData.store(library);
         System.exit(0);
     }

@@ -11,13 +11,13 @@ public class ListPatrons implements Command {
 
     @Override
     public void execute(Library library, LocalDate currentDate) throws LibraryException {
-        List<Patron> patrons = new ArrayList<>();
+        List<Patron> activePatrons = new ArrayList<>();
         for(Patron patron : library.getPatrons()) {
         	if (patron.getState()) {
-        		patrons.add(patron);
+        		activePatrons.add(patron);
         	}
         }
-        System.out.println(generatePatronList(patrons));
+        System.out.println(generatePatronList(activePatrons));
     }
 
     public String generatePatronList(List<Patron> patrons) {

@@ -1,4 +1,4 @@
-1::Abdel-Rahman Tawil::07555555555::abdel-rahman-tawil@mail.bcu.ac.uk::false::
-2::Kostas Vlachos::07596454545::kostas-vlachos@gmail.com::false::
-3::Kai Lau::07448550211::kai.lau7@mail.bcu.ac.uk::false::
-4::Charles Dickens::07382956473::charlesdickens01@gmail.com::false::
+1::Abdel-Rahman Tawil::07555555555::abdel-rahman-tawil@mail.bcu.ac.uk::true::
+2::Kostas Vlachos::07596454545::kostas-vlachos@gmail.com::true::
+3::Kai Lau::07448550211::kai.lau7@mail.bcu.ac.uk::true::
+4::Charles Dickens::07382956473::charlesdickens01@gmail.com::true::

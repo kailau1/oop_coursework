@@ -16,6 +16,14 @@ public class ActivateBook implements Command {
 		this.bookId = bookId;
 	}
 
+	/**
+     * Execute the Command to return a previously deleted book to the library
+     * 
+     * @param library Library object
+     * @param currentDate Current date of loan
+     */
+
+	
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {
 		Book book = library.getBookByID(bookId);
