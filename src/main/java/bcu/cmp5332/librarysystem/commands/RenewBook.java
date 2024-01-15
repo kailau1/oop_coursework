@@ -6,49 +6,60 @@ import java.time.LocalDate;
 import bcu.cmp5332.librarysystem.main.LibraryException;
 import bcu.cmp5332.librarysystem.data.LibraryData;
 
-public class RenewBook implements Command{
-	
+/**
+ * The RenewBook class represents a command to extend a book's loan within the library.
+ * It implements the Command interface.
+ */
+
+public class RenewBook implements Command {
+
 	private final int bookId;
 	private final int patronId;
-	
+
 	public RenewBook(int bookId, int patronId) {
-		
+
 		this.bookId = bookId;
 		this.patronId = patronId;
-		
+
 	}
-	
+
+	/**
+	 * Execute the Command extend a book's loan
+	 * 
+	 * @param library     Library object
+	 * @param currentDate Current date of loan
+	 */
+
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {
-	    Patron patron = library.getPatronByID(patronId);
-	    if (patron == null) {
-	        throw new LibraryException("Patron with ID " + patronId + " does not exist.");
-	    }
+		Patron patron = library.getPatronByID(patronId);
+		if (patron == null) {
+			throw new LibraryException("Patron with ID " + patronId + " does not exist.");
+		}
 
-	    Book book = library.getBookByID(bookId);
-	    if (book == null) {
-	        throw new LibraryException("Book with ID " + bookId + " does not exist.");
-	    }
-	    
-	    if (!book.isOnLoan()) {
-	        throw new LibraryException("Book is not currently on loan.");
-	    }
+		Book book = library.getBookByID(bookId);
+		if (book == null) {
+			throw new LibraryException("Book with ID " + bookId + " does not exist.");
+		}
 
-	    LocalDate originalDueDate = book.getLoan().getDueDate(); // Save the original due date
+		if (!book.isOnLoan()) {
+			throw new LibraryException("Book is not currently on loan.");
+		}
 
-	    try {
-	        LocalDate newDueDate = originalDueDate.plusDays(library.getLoanPeriod());
-	        patron.renewBook(book, newDueDate);
+		LocalDate originalDueDate = book.getLoan().getDueDate(); // Save the original due date
 
-	        System.out.println("Book #" + bookId + " has been successfully renewed by Patron #" + patronId);
-	        System.out.println("New Due Date: " + newDueDate);
+		try {
+			LocalDate newDueDate = originalDueDate.plusDays(library.getLoanPeriod());
+			patron.renewBook(book, newDueDate);
 
-	        LibraryData.store(library); 
-	    } catch (IOException e) {
-	        book.getLoan().setDueDate(originalDueDate);
-	        throw new LibraryException("Failed to save changes: " + e.getMessage());
-	    }
+			System.out.println("Book #" + bookId + " has been successfully renewed by Patron #" + patronId);
+			System.out.println("New Due Date: " + newDueDate);
+
+			LibraryData.store(library);
+		} catch (IOException e) {
+			book.getLoan().setDueDate(originalDueDate);
+			throw new LibraryException("Failed to save changes: " + e.getMessage());
+		}
 	}
-
 
 }

@@ -33,9 +33,9 @@ public class AddBookWindow extends JFrame implements ActionListener {
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+	/**
+	 * Initialize the contents of the frame.
+	 */
     private void initialize() {
 
         try {

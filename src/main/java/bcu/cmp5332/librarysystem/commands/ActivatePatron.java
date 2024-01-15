@@ -8,13 +8,31 @@ import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * The ActivatePatron class represents a command to return a previously deleted patron to the library.
+ * It implements the Command interface.
+ */
+
 public class ActivatePatron implements Command {
 
 	private final int patronId;
 
+	/**
+     * Constructs a new instance of the ActivatePatron command with the specified patron ID.
+     *
+     * @param patronId The ID of the patron to be activated.
+     */
+	
 	public ActivatePatron(int patronId) {
 		this.patronId = patronId;
 	}
+	
+	/**
+	 * Execute the Command to return a previously deleted patron to the library
+	 * 
+	 * @param library     Library object
+	 * @param currentDate Current date of loan
+	 */
 
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {

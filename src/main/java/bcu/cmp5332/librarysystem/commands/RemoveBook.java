@@ -7,6 +7,11 @@ import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * The RemoveBook class represents a command to remove (hide) a book within the library.
+ * It implements the Command interface.
+ */
+
 public class RemoveBook implements Command {
 
 	private final int bookId;
@@ -14,6 +19,14 @@ public class RemoveBook implements Command {
 	public RemoveBook(int bookId) {
 		this.bookId = bookId;
 	}
+
+	/**
+     * Executes the command to list all active books within the Library.
+     *
+     * @param library     The Library object representing the library.
+     * @param currentDate The current date of the library operation.
+     * @throws LibraryException If there is an issue with the library operation.
+     */
 
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {

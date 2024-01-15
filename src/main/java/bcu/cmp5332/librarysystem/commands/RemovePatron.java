@@ -8,39 +8,49 @@ import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * The RemovePatron class represents a command to remove (hide) a patron within the library.
+ * It implements the Command interface.
+ */
+
 public class RemovePatron implements Command {
 
-    private final int patronId;
+	private final int patronId;
 
-    public RemovePatron(int patronId) {
-        this.patronId = patronId;
-    }
+	public RemovePatron(int patronId) {
+		this.patronId = patronId;
+	}
 
-    @Override
-    public void execute(Library library, LocalDate currentDate) throws LibraryException {
-        Patron patron = library.getPatronByID(patronId);
-        if (patron == null) {
-            throw new LibraryException("Patron with ID " + patronId + " not found.");
-        }
+	/**
+	 * Execute the Command to remove a patron from the library
+	 * 
+	 * @param library     Library object
+	 * @param currentDate Current date of loan
+	 */
 
-        boolean originalState = patron.getState();
-        
-        
+	@Override
+	public void execute(Library library, LocalDate currentDate) throws LibraryException {
+		Patron patron = library.getPatronByID(patronId);
+		if (patron == null) {
+			throw new LibraryException("Patron with ID " + patronId + " not found.");
+		}
 
-        try {
-        	if (patron.getBooks().size() != 0) {
-        		System.out.println("Unable to remove this patron as they have books on loan.");
-        	} else {
-        		patron.setInactive();
-                System.out.println("Patron #" + patronId + " has been set to inactive.");
+		boolean originalState = patron.getState();
 
-        	}
-            LibraryData.store(library);
-        } catch (IOException e) {
-            if (originalState) {
-                patron.setActive();
-            }
-            throw new LibraryException("Failed to save changes: " + e.getMessage());
-        }
-    }
+		try {
+			if (patron.getBooks().size() != 0) {
+				System.out.println("Unable to remove this patron as they have books on loan.");
+			} else {
+				patron.setInactive();
+				System.out.println("Patron #" + patronId + " has been set to inactive.");
+
+			}
+			LibraryData.store(library);
+		} catch (IOException e) {
+			if (originalState) {
+				patron.setActive();
+			}
+			throw new LibraryException("Failed to save changes: " + e.getMessage());
+		}
+	}
 }

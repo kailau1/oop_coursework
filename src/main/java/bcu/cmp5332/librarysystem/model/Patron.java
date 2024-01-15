@@ -14,6 +14,8 @@ public class Patron {
 	private final List<Book> books = new ArrayList<>();
 	private Boolean state;
 	private final int maxBooks = 5;
+    private final List<Book> previousBooks = new ArrayList<>();
+
 
 	// TODO: implement constructor here : DONE
 	public Patron(int id, String name, String phone, String email, Boolean state) {
@@ -51,7 +53,7 @@ public class Patron {
 			throw new LibraryException("The book is not on loan to this patron.");
 		} else {
 			books.remove(book);
-			book.setLoan(null);
+			previousBooks.add(book);
 		}
 	}
 
@@ -60,11 +62,20 @@ public class Patron {
 		books.add(book);
 
 	}
+	
+	/**
+	 * Function to remove a patron to rollback changes made to this class during
+	 * BorrowBook runtime
+	 */
 
 	public void removeBook(Book book) {
 		// For rollback purposes only
 		books.remove(book);
 	}
+	
+	public List<Book> getPreviousBooks() {
+        return previousBooks;
+    }
 
 	public String getDetails() {
 		return "Patron #" + id + "- Name: " + name;
@@ -107,24 +118,24 @@ public class Patron {
 	}
 
 	/**
-     * Function to set a patron as active
-     */
-	
+	 * Function to set a previously deleted book as active within the Library
+	 */
+
 	public void setActive() {
 		this.state = true;
 	}
 
 	/**
-     * Function to set a patron as inactive
-     */
-	
+	 * Function to set a patron as inactive (remove) it from the Library
+	 */
+
 	public void setInactive() {
 		this.state = false;
 	}
-	
+
 	/**
-     * Function to return the patron's state (active or inactive)
-     */
+	 * Function to return the patron's state (active or inactive)
+	 */
 
 	public Boolean getState() {
 		return state;

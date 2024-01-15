@@ -7,8 +7,7 @@ package bcu.cmp5332.librarysystem.main;
  */
 public class LibraryException extends Exception {
 
-    public LibraryException(String message) {
-        super(message);
-    }
+	public LibraryException(String message) {
+		super(message);
+	}
 }
- 

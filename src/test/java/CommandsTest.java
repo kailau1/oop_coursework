@@ -12,8 +12,8 @@ public class CommandsTest {
     public void testListPatrons() {
         Library library = new Library();
 
-        Patron patron1 = new Patron(1, "Kai Lau", "07944833921", "kai.lau7@mail.bcu.ac.uk");
-        Patron patron2 = new Patron(2, "Josh Lucas", "07433984143", "josh.lucas@mail.bcu.ac.uk");
+        Patron patron1 = new Patron(1, "Kai Lau", "07944833921", "kai.lau7@mail.bcu.ac.uk", true);
+        Patron patron2 = new Patron(2, "Lau Kai", "07433984143", "lau.kai@mail.bcu.ac.uk", true);
         library.addPatron(patron1);
         library.addPatron(patron2);
 
@@ -21,7 +21,7 @@ public class CommandsTest {
         String generatedOutput = listPatronsCommand.generatePatronList(library.getPatrons());
 
         String expectedOutput = "Patron #1- Name: Kai Lau\n"
-        		+ "Patron #2- Name: Josh Lucas\n"
+        		+ "Patron #2- Name: Lau Kai\n"
         		+ "2 patron(s)";
 
         assertEquals(expectedOutput, generatedOutput);
@@ -31,8 +31,8 @@ public class CommandsTest {
     public void testListBooks() {
     	Library library = new Library();
     	
-    	Book book1 = new Book(1, "To Kill a Mockingbird", "Harper Lee", "1960", "HarperCollins");
-    	Book book2 = new Book(2, "The Hunger Games", "Suzanne Collins", "2008", "Scholastic");
+    	Book book1 = new Book(1, "To Kill a Mockingbird", "Harper Lee", "1960", "HarperCollins", true);
+    	Book book2 = new Book(2, "The Hunger Games", "Suzanne Collins", "2008", "Scholastic", true);
     	library.addBook(book1);
     	library.addBook(book2);
     	
@@ -50,12 +50,12 @@ public class CommandsTest {
     public void testIssueBooks() {
     	Library library = new Library();
     	
-    	Book book1 = new Book(1, "To Kill a Mockingbird", "Harper Lee", "1960", "HarperCollins");
-    	Book book2 = new Book(2, "The Hunger Games", "Suzanne Collins", "2008", "Scholastic");
+    	Book book1 = new Book(1, "To Kill a Mockingbird", "Harper Lee", "1960", "HarperCollins", true);
+    	Book book2 = new Book(2, "The Hunger Games", "Suzanne Collins", "2008", "Scholastic", true);
     	library.addBook(book1);
     	library.addBook(book2);
     	
-    	Patron patron1 = new Patron(1, "Kai Lau", "07944833921", "kai.lau7@mail.bcu.ac.uk");
+    	Patron patron1 = new Patron(1, "Kai Lau", "07944833921", "kai.lau7@mail.bcu.ac.uk", true);
         library.addPatron(patron1);
         
         LocalDate currentDate = LocalDate.now();
@@ -71,11 +71,11 @@ public class CommandsTest {
         assertTrue(patron1.getBooks().contains(book1));
         assertTrue(patron1.getBooks().contains(book2));
         
-        assertTrue(book1.isOnLoan()); // Checking if the book is on loan
+        assertTrue(book1.isOnLoan()); 
 
         Loan loan = book1.getLoan();
 
-        assertNotNull(loan); // Checking that the loan object has been referenced within the book object.
+        assertNotNull(loan); 
 
         assertEquals(book1, loan.getBook());
         assertEquals(patron1, loan.getPatron());

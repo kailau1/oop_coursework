@@ -11,46 +11,46 @@ import java.util.Scanner;
 
 public class PatronDataManager implements DataManager {
 
-    private final String RESOURCE = "./resources/data/patrons.txt";
-    
-    @Override
-    public void loadData(Library library) throws IOException, LibraryException {
-        // TODO: implementation here : DONE
-    	try (Scanner sc = new Scanner(new File(RESOURCE))) {
-    		int line_idx = 1;
-    		while (sc.hasNextLine()) {
-    			String line = sc.nextLine();
-    			String[] properties = line.split(SEPARATOR, -1);
-    			try {
-    				int id = Integer.parseInt(properties[0]);
-    				String name = properties[1];
-    				String phone = properties[2];
-    				String email = properties[3];
-    				Boolean state = Boolean.parseBoolean(properties[4]);
-    				Patron patron = new Patron(id, name, phone, email, state);
-    				library.addPatron(patron);
-    			} catch (NumberFormatException ex) {
-    				throw new LibraryException("Unable to parse patron id" + properties[0] + "on line " + line_idx + 
-    						"\nError: " + ex);
-    			}
-    			line_idx++;
-    		}
-    	}
-    }
+	private final String RESOURCE = "./resources/data/patrons.txt";
 
-    @Override
-    public void storeData(Library library) throws IOException {
-        // TODO: implementation here : DONE
-    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
-    		for (Patron patron : library.getPatrons()) {
-    			out.print(patron.getId() + SEPARATOR);
-    			out.print(patron.getName() + SEPARATOR);
-    			out.print(patron.getPhone() + SEPARATOR);
-    			out.print(patron.getEmail() + SEPARATOR);
-    			out.print(patron.getState() + SEPARATOR);
-    			out.println();
-    		}
-    	}
-    }
+	@Override
+	public void loadData(Library library) throws IOException, LibraryException {
+		// TODO: implementation here : DONE
+		try (Scanner sc = new Scanner(new File(RESOURCE))) {
+			int line_idx = 1;
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
+				String[] properties = line.split(SEPARATOR, -1);
+				try {
+					int id = Integer.parseInt(properties[0]);
+					String name = properties[1];
+					String phone = properties[2];
+					String email = properties[3];
+					Boolean state = Boolean.parseBoolean(properties[4]);
+					Patron patron = new Patron(id, name, phone, email, state);
+					library.addPatron(patron);
+				} catch (NumberFormatException ex) {
+					throw new LibraryException(
+							"Unable to parse patron id" + properties[0] + "on line " + line_idx + "\nError: " + ex);
+				}
+				line_idx++;
+			}
+		}
+	}
+
+	@Override
+	public void storeData(Library library) throws IOException {
+		// TODO: implementation here : DONE
+		try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
+			for (Patron patron : library.getPatrons()) {
+				out.print(patron.getId() + SEPARATOR);
+				out.print(patron.getName() + SEPARATOR);
+				out.print(patron.getPhone() + SEPARATOR);
+				out.print(patron.getEmail() + SEPARATOR);
+				out.print(patron.getState() + SEPARATOR);
+				out.println();
+			}
+		}
+	}
+
 }
- 

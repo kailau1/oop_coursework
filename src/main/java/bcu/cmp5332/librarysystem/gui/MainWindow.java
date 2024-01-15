@@ -163,10 +163,10 @@ public class MainWindow extends JFrame implements ActionListener {
             
             
         } else if (ae.getSource() == booksIssue) {
-            
+            new BorrowBookWindow(this);
             
         } else if (ae.getSource() == booksReturn) {
-            
+            new ReturnBookWindow(this);
             
         } else if (ae.getSource() == booksViewBook) {
         	String bookIdStr = JOptionPane.showInputDialog(this, "Enter Book ID:");
@@ -199,10 +199,12 @@ public class MainWindow extends JFrame implements ActionListener {
                 }
             }
         } else if (ae.getSource() == memBorrowBook) {
-        	
+        	new BorrowBookWindow(this);
         } else if (ae.getSource() == memReturnBook) {
+        	new ReturnBookWindow(this);
         	
         } else if (ae.getSource() == memRenewBook) {
+        	new RenewBookWindow(this);
         	
         }
         

@@ -8,22 +8,32 @@ import bcu.cmp5332.librarysystem.main.LibraryException;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * The ActivateBook class represents a command to return a previously deleted book to the library.
+ * It implements the Command interface.
+ */
+
 public class ActivateBook implements Command {
 
 	private final int bookId;
+	
+	/**
+     * Constructs a new instance of the ActivateBook command with the specified book ID.
+     *
+     * @param bookId The ID of the book to be activated.
+     */
 
 	public ActivateBook(int bookId) {
 		this.bookId = bookId;
 	}
 
 	/**
-     * Execute the Command to return a previously deleted book to the library
-     * 
-     * @param library Library object
-     * @param currentDate Current date of loan
-     */
+	 * Execute the Command to return a previously deleted book to the library
+	 * 
+	 * @param library     Library object
+	 * @param currentDate Current date of loan
+	 */
 
-	
 	@Override
 	public void execute(Library library, LocalDate currentDate) throws LibraryException {
 		Book book = library.getBookByID(bookId);
